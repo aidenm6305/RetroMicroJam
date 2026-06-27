@@ -29,6 +29,7 @@ public class CarMovement : MonoBehaviour
     void Awake()
     {
         rigidbody2D = GetComponent<Rigidbody2D>();
+        rotationAngle = rigidbody2D.rotation;
     }
 
     private void Start()
