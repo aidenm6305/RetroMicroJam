@@ -14,34 +14,56 @@ public class CarMovement : MonoBehaviour
     [SerializeField]
     float accelerationFactor = 30f;
     public float maxSpeed = 20f;
+    private float maxStartSpeed = 20f;
     public float turnfactor = 3.5f;
+
+    [Tooltip("How quickly the car slows down to normal speed after boosting.")]
+    public float boostDeceleration = 2f;
 
     public float currentSpeed = 0;
     float steeringInput = 0;
     float rotationAngle = 0;
+    bool isBoosting = false;
     Rigidbody2D rigidbody2D;
 
     void Awake()
     {
         rigidbody2D = GetComponent<Rigidbody2D>();
     }
+
+    private void Start()
+    {
+        maxStartSpeed = maxSpeed;
+    }
+
     void FixedUpdate()
     {
         ApplyEngineForce();
         ApplySteering();
         KillOrthogonalVelocity();
     }
-    
+
     void ApplyEngineForce()
     {
         currentSpeed = Vector2.Dot(rigidbody2D.linearVelocity, transform.up);
-        Debug.Log("Current Speed: " + currentSpeed);
-        if (currentSpeed > maxSpeed)
+
+        if (!isBoosting && currentSpeed > maxSpeed)
         {
+            Vector2 forwardVelocity = transform.up * currentSpeed;
+            Vector2 rightVelocity = transform.right * Vector2.Dot(rigidbody2D.linearVelocity, transform.right);
+
+            float deceleratedSpeed = Mathf.Lerp(currentSpeed, maxSpeed, Time.fixedDeltaTime * boostDeceleration);
+
+            rigidbody2D.linearVelocity = (Vector2)transform.up * deceleratedSpeed + rightVelocity;
+
             return;
         }
-        Vector2 engineForceVector = transform.up * accelerationFactor;
-        rigidbody2D.AddForce(engineForceVector, ForceMode2D.Force);
+
+        if (currentSpeed <= maxSpeed)
+        {
+            Vector2 engineForceVector = transform.up * accelerationFactor;
+            rigidbody2D.AddForce(engineForceVector, ForceMode2D.Force);
+        }
     }
 
     void ApplySteering()
@@ -62,5 +84,12 @@ public class CarMovement : MonoBehaviour
     public void SetInputVector(Vector2 inputVector)
     {
         steeringInput = inputVector.x;
+    }
+
+    void OnSprint(InputValue value)
+    {
+        float maxBoostSpeed = 30f;
+        isBoosting = value.isPressed;
+        maxSpeed = isBoosting ? maxBoostSpeed : maxStartSpeed;
     }
 }
