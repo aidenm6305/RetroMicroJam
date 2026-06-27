@@ -23,7 +23,7 @@ public class CarMovement : MonoBehaviour
     public float currentSpeed = 0;
     float steeringInput = 0;
     float rotationAngle = 0;
-    bool isBoosting = false;
+    public bool IsBoosting { get; private set; } = false;
     Rigidbody2D rigidbody2D;
 
     void Awake()
@@ -48,7 +48,7 @@ public class CarMovement : MonoBehaviour
     {
         currentSpeed = Vector2.Dot(rigidbody2D.linearVelocity, transform.up);
 
-        if (!isBoosting && currentSpeed > maxSpeed)
+        if (!IsBoosting && currentSpeed > maxSpeed)
         {
             Vector2 forwardVelocity = transform.up * currentSpeed;
             Vector2 rightVelocity = transform.right * Vector2.Dot(rigidbody2D.linearVelocity, transform.right);
@@ -90,7 +90,7 @@ public class CarMovement : MonoBehaviour
     void OnSprint(InputValue value)
     {
         float maxBoostSpeed = 30f;
-        isBoosting = value.isPressed;
-        maxSpeed = isBoosting ? maxBoostSpeed : maxStartSpeed;
+        IsBoosting = value.isPressed;
+        maxSpeed = IsBoosting ? maxBoostSpeed : maxStartSpeed;
     }
 }
