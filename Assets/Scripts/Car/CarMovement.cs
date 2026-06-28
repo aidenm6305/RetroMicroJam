@@ -93,4 +93,22 @@ public class CarMovement : MonoBehaviour
         IsBoosting = value.isPressed;
         maxSpeed = IsBoosting ? maxBoostSpeed : maxStartSpeed;
     }
+
+    public void ResetCar(Vector2 startPosition, Quaternion startRotation)
+    {
+        transform.position = startPosition;
+        transform.rotation = startRotation;
+
+        rotationAngle = startRotation.eulerAngles.z;
+        currentSpeed = 0f;
+        IsBoosting = false;
+        maxSpeed = maxStartSpeed;
+
+        if (rigidbody2D != null)
+        {
+            rigidbody2D.linearVelocity = Vector2.zero;
+            rigidbody2D.angularVelocity = 0f;
+            rigidbody2D.MoveRotation(rotationAngle);
+        }
+    }
 }

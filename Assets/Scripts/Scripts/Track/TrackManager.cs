@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections.Generic;
+using System;
 public class TrackManager : MonoBehaviour
 {
 
@@ -8,6 +9,9 @@ public class TrackManager : MonoBehaviour
     
     CheckPoint nextCheckPoint;
     int totalCheckPoints;
+
+    public event Action OnLapCompleted;
+
     public void Start()
     {
         Debug.Log("TrackManager constructor called.");
@@ -41,6 +45,7 @@ public class TrackManager : MonoBehaviour
         if (nextCheckPoint == checkPoints[1])
         {
             Debug.Log("Lap completed!");
+            OnLapCompleted?.Invoke();
         }
     } 
 
