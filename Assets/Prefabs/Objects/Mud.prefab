@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1454966238556840635}
   - component: {fileID: 170937762981068975}
   m_Layer: 0
-  m_Name: Object
+  m_Name: Mud
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -69,7 +69,7 @@ CircleCollider2D:
   m_CompositeOperation: 0
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
-  m_Radius: 0.1
+  m_Radius: 0.5
 --- !u!114 &170937762981068975
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -82,6 +82,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d34525b3fe248b4082830896fcaf664, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Object
+  noCollision: 1
 --- !u!1 &5821829165086019867
 GameObject:
   m_ObjectHideFlags: 0
@@ -163,7 +164,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 100
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
+  m_Sprite: {fileID: 390670354249441860, guid: 6b9e57b7e4e715c4e854547be5ae1f37, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

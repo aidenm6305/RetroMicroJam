@@ -4,6 +4,8 @@ public class Object : MonoBehaviour
 {
     private bool canBePlaced = false;
     private bool isPlaced = false;
+    [SerializeField]
+    private bool noCollision = false;
     private CircleCollider2D circleCollider;
     private SpriteRenderer spriteRenderer;
     private void Start()
@@ -28,7 +30,8 @@ public class Object : MonoBehaviour
         if (canBePlaced)
         {
             isPlaced = true;
-            circleCollider.isTrigger = false;
+            if (!noCollision)
+                circleCollider.isTrigger = false;
             spriteRenderer.color = Color.white;
             Debug.Log("Object placed successfully.");
             return true;
@@ -42,5 +45,13 @@ public class Object : MonoBehaviour
         if (isPlaced) return;
         transform.position = setPosition;
         Debug.Log(transform.position);
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (noCollision)
+        {
+            //apply some sliding thing
+        }
     }
 }
