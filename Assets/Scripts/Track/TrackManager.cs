@@ -22,7 +22,6 @@ public class TrackManager : MonoBehaviour
             checkPoints[i].Setup(i, this);
         }
         nextCheckPoint = checkPoints[1];
-
     }
 
     public CheckPoint GetNextPoint(int currentIndex)
