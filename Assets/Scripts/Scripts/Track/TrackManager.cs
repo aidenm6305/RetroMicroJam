@@ -48,5 +48,4 @@ public class TrackManager : MonoBehaviour
             OnLapCompleted?.Invoke();
         }
     } 
-
 }

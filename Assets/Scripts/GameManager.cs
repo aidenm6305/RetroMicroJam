@@ -9,7 +9,7 @@ public class GameManager : MonoBehaviour
 
     [Header("Spawn Settings")]
     [SerializeField] private Transform startPoint;
-
+    [SerializedField] private  
     private void Start()
     {
         obstacleSelectionUI.SetActive(false);
@@ -34,6 +34,7 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 0f;
 
         obstacleSelectionUI.SetActive(true);
+
     }
 
     public void OnObstacleSelected()
