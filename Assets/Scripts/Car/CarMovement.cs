@@ -17,6 +17,8 @@ public class CarMovement : MonoBehaviour
     private float maxStartSpeed = 20f;
     public float turnfactor = 3.5f;
 
+    public GameManager gameManager;
+
     [Tooltip("How quickly the car slows down to normal speed after boosting.")]
     public float boostDeceleration = 2f;
 
@@ -133,6 +135,11 @@ public class CarMovement : MonoBehaviour
         {
             rigidbody2D.linearVelocity = rigidbody2D.linearVelocity.normalized * maxSpeed;
         }
+    }
+
+    public void ApplyFireEffect()
+    {
+        gameManager.TriggerGameOver();
     }
 
     public void RemoveEffects()

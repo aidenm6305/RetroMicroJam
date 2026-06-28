@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public enum HazardType { Solid, Oil, Mud }
+public enum HazardType { Solid, Oil, Mud, Fire }
 
 public class Object : MonoBehaviour
 {
@@ -63,6 +63,7 @@ public class Object : MonoBehaviour
             {
                 if (hazardType == HazardType.Oil) car.ApplyOilEffect();
                 else if (hazardType == HazardType.Mud) car.ApplyMudEffect();
+                else if (hazardType == HazardType.Fire) car.ApplyFireEffect();
             }
         }
     }

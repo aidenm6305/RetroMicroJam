@@ -102,10 +102,10 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    private void TriggerGameOver()
+    public void TriggerGameOver()
     {
         Debug.Log("Player was stuck! Game Over.");
-
+        
         Cursor.visible = true;
         isRacing = false;
         Time.timeScale = 0f;

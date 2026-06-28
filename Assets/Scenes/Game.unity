@@ -4267,6 +4267,10 @@ MonoBehaviour:
   objectsToPlace:
   - {fileID: 170937762981068975, guid: 7fd254ffd01c2a1478f064632e38a83d, type: 3}
   - {fileID: 170937762981068975, guid: dfa985a868c8aa14cb46b3c403004827, type: 3}
+  - {fileID: 170937762981068975, guid: 4602867882a27b54f86ad1c73af43cdb, type: 3}
+  - {fileID: 170937762981068975, guid: 9125dbfdd30dd3344b61e87ba1558e41, type: 3}
+  - {fileID: 170937762981068975, guid: 3fdc51b886640264d8b340e384f0eccd, type: 3}
+  - {fileID: 170937762981068975, guid: 74cd4a131192bec4491fd51ea9d555cc, type: 3}
   gameManager: {fileID: 1792164923}
 --- !u!4 &1408060825
 Transform:
@@ -6049,7 +6053,7 @@ MonoBehaviour:
   totalScore: 0
   currentLapTime: 0
   baseLapScore: 1000
-  scorePenaltyPerSecond: 20
+  scorePenaltyPerSecond: 10
   stuckTimeLimit: 2
   speedThreshold: 0.5
 --- !u!4 &1792164924
@@ -6942,6 +6946,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: -90
       objectReference: {fileID: 0}
+    - target: {fileID: 4503635837261586435, guid: 30e6078fb29bb3c46a76f29befd3989a, type: 3}
+      propertyPath: gameManager
+      value: 
+      objectReference: {fileID: 1792164923}
     - target: {fileID: 7551061416280022159, guid: 30e6078fb29bb3c46a76f29befd3989a, type: 3}
       propertyPath: m_Name
       value: Car
