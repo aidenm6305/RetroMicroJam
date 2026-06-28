@@ -2499,6 +2499,53 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1124516980998441862, guid: 83d6064255d08a1409548acb6fb17920, type: 3}
   m_PrefabInstance: {fileID: 1391369176}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1408060823
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1408060825}
+  - component: {fileID: 1408060824}
+  m_Layer: 0
+  m_Name: Placement
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1408060824
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1408060823}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 08cfc4d341a78d945b31b242d834818c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Place
+  objectsToPlace:
+  - {fileID: 170937762981068975, guid: 7fd254ffd01c2a1478f064632e38a83d, type: 3}
+  gameManager: {fileID: 1792164923}
+--- !u!4 &1408060825
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1408060823}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1418496187
 GameObject:
   m_ObjectHideFlags: 0
@@ -2733,7 +2780,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1491238998
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3294,6 +3341,9 @@ MonoBehaviour:
   playerCar: {fileID: 2075495815}
   obstacleSelectionUI: {fileID: 1631760889}
   startPoint: {fileID: 656615355}
+  fullCamera: {fileID: 1491238996}
+  mainCamera: {fileID: 408402088}
+  placeController: {fileID: 1408060824}
 --- !u!4 &1792164924
 Transform:
   m_ObjectHideFlags: 0
@@ -3638,3 +3688,4 @@ SceneRoots:
   - {fileID: 824915239}
   - {fileID: 1792164924}
   - {fileID: 656615355}
+  - {fileID: 1408060825}

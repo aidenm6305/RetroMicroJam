@@ -9,7 +9,24 @@ public class GameManager : MonoBehaviour
 
     [Header("Spawn Settings")]
     [SerializeField] private Transform startPoint;
-    [SerializedField] private  
+
+    [SerializeField] private GameObject fullCamera;
+    [SerializeField] private GameObject mainCamera;
+
+    [SerializeField] private Place placeController;
+    public void ObjectPlaced()
+    {
+        fullCamera.SetActive(false);
+        mainCamera.SetActive(true);
+
+        if (playerCar != null && startPoint != null)
+        {
+            playerCar.ResetCar(startPoint.position, startPoint.rotation);
+        }
+
+        Time.timeScale = 1f;
+    }
+
     private void Start()
     {
         obstacleSelectionUI.SetActive(false);
@@ -40,12 +57,12 @@ public class GameManager : MonoBehaviour
     public void OnObstacleSelected()
     {
         obstacleSelectionUI.SetActive(false);
+        fullCamera.SetActive(true);
+        mainCamera.SetActive(false);
 
-        if (playerCar != null && startPoint != null)
+        if (placeController != null)
         {
-            playerCar.ResetCar(startPoint.position, startPoint.rotation);
+            placeController.SetPlacement();
         }
-
-        Time.timeScale = 1f;
     }
 }
