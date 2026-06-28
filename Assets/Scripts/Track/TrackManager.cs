@@ -29,7 +29,15 @@ public class TrackManager : MonoBehaviour
         return checkPoints[(currentIndex + 1) % totalCheckPoints];
     }
 
-   public void CheckPointPassed(CheckPoint checkPoint)
+    public void ResetCheckpoints()
+    {
+        if (checkPoints != null && checkPoints.Count > 1)
+        {
+            nextCheckPoint = checkPoints[1];
+            Debug.Log("Checkpoints reset for a new game.");
+        }
+    }
+    public void CheckPointPassed(CheckPoint checkPoint)
     {
         
         Debug.Log("Checkpoint passed: " + checkPoint.GetIndex());

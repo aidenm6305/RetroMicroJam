@@ -129,6 +129,8 @@ public class GameManager : MonoBehaviour
         }
         if (placeController != null)
             placeController.ClearAllObstacles();
+
+        trackManager.ResetCheckpoints();
         UpdateHUD();
         isRacing = true;
         Cursor.visible = false;

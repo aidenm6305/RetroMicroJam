@@ -44,7 +44,7 @@ public class CarUI : MonoBehaviour
             return;
         }
 
-        speedometerText.SetText("{0:0} mph", carMovement.currentSpeed * 2.237f);
+        speedometerText.SetText("{0:0} mph", carMovement.currentSpeed * 3.73f);
     }
 
     public void UpdateNeedle()
