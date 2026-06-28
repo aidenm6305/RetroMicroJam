@@ -82,7 +82,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d34525b3fe248b4082830896fcaf664, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Object
-  noCollision: 1
+  hazardType: 2
 --- !u!1 &5821829165086019867
 GameObject:
   m_ObjectHideFlags: 0

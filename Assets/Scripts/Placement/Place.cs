@@ -11,10 +11,10 @@ public class Place : MonoBehaviour
     private GameManager gameManager;
     private bool isPlacing = false;
     private Object currentObject;
+    private List<GameObject> activeObstacles = new List<GameObject>();
 
     public void SetPlacement()
     {
-        Debug.Log("SetPlacement called. Starting placement of a new object.");
         Cursor.visible = true;
         currentObject = objectsToPlace[Random.Range(0, objectsToPlace.Count)];
         isPlacing = true;
@@ -30,13 +30,29 @@ public class Place : MonoBehaviour
             bool didPlace = currentObject.PlaceObject();
             if (didPlace)
             {
+                activeObstacles.Add(currentObject.gameObject);
+
                 isPlacing = false;
                 Cursor.visible = false;
-                gameManager.ObjectPlaced(); 
+                gameManager.ObjectPlaced();
             }
             return;
         }
-        currentObject.SetLocation(Camera.main.ScreenToWorldPoint(Input.mousePosition));
 
+        Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        mousePos.z = 0f; 
+        currentObject.SetLocation(mousePos);
+    }
+
+    public void ClearAllObstacles()
+    {
+        foreach (GameObject obs in activeObstacles)
+        {
+            if (obs != null)
+            {
+                Destroy(obs);
+            }
+        }
+        activeObstacles.Clear(); 
     }
 }

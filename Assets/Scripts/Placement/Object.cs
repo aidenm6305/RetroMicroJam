@@ -1,26 +1,30 @@
 using UnityEngine;
 
+public enum HazardType { Solid, Oil, Mud }
+
 public class Object : MonoBehaviour
 {
+    [Header("Settings")]
+    public HazardType hazardType = HazardType.Solid;
+
     private bool canBePlaced = false;
     private bool isPlaced = false;
-    [SerializeField]
-    private bool noCollision = false;
+
     private CircleCollider2D circleCollider;
     private SpriteRenderer spriteRenderer;
+
     private void Start()
     {
         circleCollider = GetComponent<CircleCollider2D>();
-        circleCollider.isTrigger = true;
+        circleCollider.isTrigger = true; 
         spriteRenderer = GetComponentInChildren<SpriteRenderer>();
     }
+
     private void Update()
     {
-        Debug.Log("Update called. isPlaced: " + isPlaced + ", canBePlaced: " + canBePlaced);
         if (isPlaced) return;
 
         int overlap = circleCollider.Overlap(new ContactFilter2D(), new Collider2D[10]);
-        Debug.Log("Overlap count: " + overlap);
         canBePlaced = overlap == 0;
         spriteRenderer.color = canBePlaced ? Color.green : Color.red;
     }
@@ -30,13 +34,15 @@ public class Object : MonoBehaviour
         if (canBePlaced)
         {
             isPlaced = true;
-            if (!noCollision)
-                circleCollider.isTrigger = false;
             spriteRenderer.color = Color.white;
-            Debug.Log("Object placed successfully.");
+
+            if (hazardType == HazardType.Solid)
+            {
+                circleCollider.isTrigger = false;
+            }
+
             return true;
         }
-        Debug.Log("Failed to place object.");
         return false;
     }
 
@@ -44,14 +50,35 @@ public class Object : MonoBehaviour
     {
         if (isPlaced) return;
         transform.position = setPosition;
-        Debug.Log(transform.position);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (noCollision)
+        if (!isPlaced) return;
+
+        if (collision.CompareTag("Player"))
         {
-            //apply some sliding thing
+            CarMovement car = collision.GetComponent<CarMovement>();
+            if (car != null)
+            {
+                if (hazardType == HazardType.Oil) car.ApplyOilEffect();
+                else if (hazardType == HazardType.Mud) car.ApplyMudEffect();
+            }
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (!isPlaced) return;
+
+        if (collision.CompareTag("Player"))
+        {
+            CarMovement car = collision.GetComponent<CarMovement>();
+            if (car != null)
+            {
+                if (hazardType == HazardType.Oil) car.RemoveEffects();
+                else if (hazardType == HazardType.Mud) car.RemoveEffects();
+            }
         }
     }
 }

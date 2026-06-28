@@ -26,6 +26,9 @@ public class CarMovement : MonoBehaviour
     public bool IsBoosting { get; private set; } = false;
     Rigidbody2D rigidbody2D;
 
+    private float baseDriftFactor;
+    private float baseMaxSpeed;
+
     void Awake()
     {
         rigidbody2D = GetComponent<Rigidbody2D>();
@@ -35,6 +38,9 @@ public class CarMovement : MonoBehaviour
     private void Start()
     {
         maxStartSpeed = maxSpeed;
+
+        baseDriftFactor = driftFactor;
+        baseMaxSpeed = maxSpeed;
     }
 
     void FixedUpdate()
@@ -110,5 +116,28 @@ public class CarMovement : MonoBehaviour
             rigidbody2D.angularVelocity = 0f;
             rigidbody2D.MoveRotation(rotationAngle);
         }
+    }
+
+    // --- HAZARD EFFECTS ---
+
+    public void ApplyOilEffect()
+    {
+        driftFactor = 1.0f;
+    }
+
+    public void ApplyMudEffect()
+    {
+        maxSpeed = baseMaxSpeed * 0.4f;
+
+        if (currentSpeed > maxSpeed)
+        {
+            rigidbody2D.linearVelocity = rigidbody2D.linearVelocity.normalized * maxSpeed;
+        }
+    }
+
+    public void RemoveEffects()
+    {
+        driftFactor = baseDriftFactor;
+        maxSpeed = IsBoosting ? 30f : baseMaxSpeed;
     }
 }
